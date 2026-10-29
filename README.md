@@ -35,16 +35,16 @@ See [Requirements](docs/requirements.md) for access rules, deletion behavior, an
 
 ## Run
 
-./gradlew bootRun
+`./gradlew bootRun`
 
 The application uses port 8080 by default. The root URL currently returns
 404 because the home page is not implemented yet.
 
 ## Test and build
 
-./gradlew test
-./gradlew build
+`./gradlew test`
+`./gradlew build`
 
 ## Run the packaged application
 
-java -jar build/libs/coursehub-0.0.1-SNAPSHOT.war
+`java -jar build/libs/coursehub-0.0.1-SNAPSHOT.war`
