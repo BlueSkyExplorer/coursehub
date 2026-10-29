@@ -49,6 +49,8 @@ The application uses port 8080 by default. The root URL currently returns
 ./gradlew build
 ```
 
+GitHub Actions runs `./gradlew build --no-daemon`, including tests, on Java 17 for pushes and pull requests. The workflow can also be started manually.
+
 ## Run the packaged application
 
 `java -jar build/libs/coursehub-0.0.1-SNAPSHOT.war`
