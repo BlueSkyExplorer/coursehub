@@ -18,9 +18,11 @@ The product scope and access rules are defined. A minimal Spring Boot applicatio
 
 ## Technical direction
 
-Java 17, Spring Boot, Spring MVC, JSP/JSTL, Spring Security, JPA, and Gradle in one deployable application.
+The current foundation uses Java 17, Spring Boot 4.1.2, Spring MVC, and Gradle Wrapper 9.8.2, packaged as an executable WAR.
 
-Dependencies are introduced when their features are implemented.
+CourseHub uses a single application because its account, content, and discussion workflows share one deployment and data model. Spring MVC with server-rendered JSP/JSTL pages keeps form handling and presentation in the same application without a separate frontend build. WAR packaging supports JSP rendering with embedded Tomcat and allows the packaged application to run with `java -jar`.
+
+Spring Security and JPA are planned for authentication and persistence. Dependencies are introduced when their features are implemented. The Gradle Wrapper fixes the build-tool version; contributors do not need a separate Gradle installation.
 
 ## Scope
 
@@ -42,8 +44,10 @@ The application uses port 8080 by default. The root URL currently returns
 
 ## Test and build
 
-`./gradlew test`
-`./gradlew build`
+```sh
+./gradlew test
+./gradlew build
+```
 
 ## Run the packaged application
 

@@ -15,6 +15,19 @@ The application provides one shared learning workspace. It does not include a co
 - Roles: LEARNER and INSTRUCTOR
 - Product labels: Learning materials, Resources, Polls, Discussion, My activity, and Account management
 
+The home page introduces CourseHub as a product and one shared learning workspace. It does not represent a named academic module or a course catalogue.
+
+Use `LearningMaterial` for the learning-material entity, `LearningMaterialController` for its web controller, and `/materials` as the route root when that feature is implemented. Use `/materials/{id}` for a material detail page. Keep the visible label "Learning materials" consistent across navigation, forms, and documentation; do not introduce a parallel "Lecture" feature name.
+
+## Home page acceptance
+
+- `GET /` introduces CourseHub and explains the purpose of the workspace.
+- The initial page shows truthful empty states for content that is not available yet.
+- Do not display invented usage statistics, testimonials, or controls for features that are not implemented.
+- The page renders correctly both through `./gradlew bootRun` and through the executable WAR launched with `java -jar`.
+- Verify actual HTML rendering in a browser. A controller test that only checks the view name is not sufficient.
+- Keep shared layout and styling work in the subsequent layout step, rather than implementing future account or content features with the first page.
+
 ## Access rules
 
 | Action | Visitor | Learner | Instructor |
