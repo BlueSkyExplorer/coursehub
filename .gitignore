@@ -1,0 +1,31 @@
+# Gradle output
+.gradle/
+build/
+
+# IDE and operating system files
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.vscode/
+.DS_Store
+
+# Local application data
+/data/
+/uploads/
+*.mv.db
+*.trace.db
+*.h2.db
+*.lock.db
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+/src/main/resources/application-local.properties
+/src/main/resources/application-local.yml
+/src/main/resources/application-local.yaml
+
+# Logs
+*.log
