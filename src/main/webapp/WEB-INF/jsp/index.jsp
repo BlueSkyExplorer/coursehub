@@ -3,24 +3,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><c:out value="${pageTitle}" /></title>
+    <%@ include file="fragments/head.jspf" %>
 </head>
 <body>
-    <main>
-        <h1><c:out value="${pageTitle}" /></h1>
-        <p><c:out value="${introduction}" /></p>
+    <%@ include file="fragments/header.jspf" %>
 
-        <section aria-labelledby="materials-heading">
-            <h2 id="materials-heading">Learning materials</h2>
-            <p>No learning materials are available yet.</p>
+    <main id="main-content" class="container site-main" tabindex="-1">
+        <section class="intro" aria-labelledby="page-heading">
+            <h1 id="page-heading"><c:out value="${pageTitle}" /></h1>
+            <p><c:out value="${introduction}" /></p>
         </section>
 
-        <section aria-labelledby="polls-heading">
-            <h2 id="polls-heading">Polls</h2>
-            <p>No polls are available yet.</p>
-        </section>
+        <div class="content-grid">
+            <section class="panel" aria-labelledby="materials-heading">
+                <h2 id="materials-heading">Learning materials</h2>
+                <p class="empty-state">
+                    No learning materials are available yet.
+                </p>
+            </section>
+
+            <section class="panel" aria-labelledby="polls-heading">
+                <h2 id="polls-heading">Polls</h2>
+                <p class="empty-state">
+                    No polls are available yet.
+                </p>
+            </section>
+        </div>
     </main>
+
+    <%@ include file="fragments/footer.jspf" %>
 </body>
 </html>

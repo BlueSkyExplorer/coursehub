@@ -1,0 +1,15 @@
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header">
+    <div class="container header-inner">
+        <a class="brand" href="<c:url value='/' />">CourseHub</a>
+
+        <nav aria-label="Main navigation">
+            <ul class="nav-list">
+                <li>
+                    <a href="<c:url value='/' />" aria-current="page">Home</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
