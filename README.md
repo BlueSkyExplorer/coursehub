@@ -4,7 +4,8 @@ CourseHub is a standalone learning workspace for accessing learning materials, d
 
 ## Current status
 
-The product scope and access rules are defined. A minimal Spring Boot application is available. The application can be tested, built, and started. Product pages and business features are not implemented yet.
+The application renders a public CourseHub home page with a workspace introduction and empty states for learning materials and polls.
+Account, content management, voting, and discussion workflows are not implemented yet.
 
 ## Planned capabilities
 
@@ -53,4 +54,23 @@ GitHub Actions runs `./gradlew build --no-daemon`, including tests, on Java 17 f
 
 ## Run the packaged application
 
-`java -jar build/libs/coursehub-0.0.1-SNAPSHOT.war`
+Build the executable WAR:
+
+```sh
+./gradlew build
+```
+
+For the current build, place the WAR under a path without spaces before
+launching it. JSP tag-library scanning fails when the WAR is launched
+from the project's current path containing spaces.
+
+On macOS, run the following commands from the project root:
+
+```sh
+mkdir -p /private/tmp/coursehub-war-check
+cp build/libs/coursehub-0.0.1-SNAPSHOT.war /private/tmp/coursehub-war-check/coursehub.war
+cd /private/tmp/coursehub-war-check
+java -jar coursehub.war
+```
+
+Open http://localhost:8080/.
