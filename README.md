@@ -1,47 +1,30 @@
 # CourseHub
 
-CourseHub is a standalone learning workspace for accessing learning materials, downloading resources, participating in polls, and discussing content.
+CourseHub is a shared learning workspace for accessing learning materials, downloading resources, participating in polls, and discussing content.
 
-## Current status
+## Current features
 
-The application renders a public CourseHub home page with a workspace introduction and empty states for learning materials and polls.
-Account, content management, voting, and discussion workflows are not implemented yet.
+- A public home page with empty states for learning materials and polls.
+- Learner registration with server-side validation and duplicate username and email checks. Public registration always assigns the Learner role.
+- CSRF protection for registration submissions and BCrypt password hashing.
 
-## Planned capabilities
+Session login and logout are the next account features. See [Requirements](docs/requirements.md) for the planned workflows and access rules.
 
-- Learner registration and session login
-- Personal account management
-- Instructor-managed learning materials and downloadable resources
-- Five-option polls with vote changes and results
-- Discussion on learning materials and polls
-- Personal activity history
-- Instructor account management with session and last-instructor safeguards
+## Stack
 
-## Technical direction
+CourseHub uses Java 17, Spring Boot 4.1.2, Spring MVC, JSP/JSTL, Spring Security, Spring Data JPA, and H2. Gradle Wrapper 9.8.2 builds a single executable WAR. WAR packaging lets embedded Tomcat render JSP pages when the application runs with `java -jar`.
 
-The current foundation uses Java 17, Spring Boot 4.1.2, Spring MVC, and Gradle Wrapper 9.8.2, packaged as an executable WAR.
+## Run locally
 
-CourseHub uses a single application because its account, content, and discussion workflows share one deployment and data model. Spring MVC with server-rendered JSP/JSTL pages keeps form handling and presentation in the same application without a separate frontend build. WAR packaging supports JSP rendering with embedded Tomcat and allows the packaged application to run with `java -jar`.
+Use JDK 17. The first build needs network access to download Gradle and its dependencies.
 
-Spring Security and JPA are planned for authentication and persistence. Dependencies are introduced when their features are implemented. The Gradle Wrapper fixes the build-tool version; contributors do not need a separate Gradle installation.
+```sh
+./gradlew bootRun --args='--spring.profiles.active=dev'
+```
 
-## Scope
+Open the [home page](http://localhost:8080/) or [registration page](http://localhost:8080/register).
 
-CourseHub provides one shared learning workspace. Payments, streaming, live chat, course enrolment, and multi-course management are outside the initial scope.
-
-See [Requirements](docs/requirements.md) for access rules, deletion behavior, and acceptance examples.
-
-## Prerequisites
-
-- JDK 17
-- Network access for the first Gradle and dependency download
-
-## Run
-
-`./gradlew bootRun`
-
-The application uses port 8080 by default. The root URL currently returns
-404 because the home page is not implemented yet.
+The `dev` profile stores accounts in `data/coursehub.mv.db` relative to the application's working directory. The database is ignored by Git and persists across restarts. Use fictional details and an `example.com` address when trying registration.
 
 ## Test and build
 
@@ -50,27 +33,19 @@ The application uses port 8080 by default. The root URL currently returns
 ./gradlew build
 ```
 
-GitHub Actions runs `./gradlew build --no-daemon`, including tests, on Java 17 for pushes and pull requests. The workflow can also be started manually.
+The tests use isolated in-memory H2 databases. They cover account persistence, username and email uniqueness, registration validation, CSRF protection, and the assigned role and stored password hash. GitHub Actions runs the build and tests on Java 17 for pushes and pull requests.
 
-## Run the packaged application
+## Run the executable WAR
 
-Build the executable WAR:
-
-```sh
-./gradlew build
-```
-
-For the current build, place the WAR under a path without spaces before
-launching it. JSP tag-library scanning fails when the WAR is launched
-from the project's current path containing spaces.
-
-On macOS, run the following commands from the project root:
+After `./gradlew build`, run the following commands from the project root on macOS. The temporary directory provides a path without spaces for JSP tag-library scanning.
 
 ```sh
-mkdir -p /private/tmp/coursehub-war-check
-cp build/libs/coursehub-0.0.1-SNAPSHOT.war /private/tmp/coursehub-war-check/coursehub.war
-cd /private/tmp/coursehub-war-check
-java -jar coursehub.war
+war_dir=$(mktemp -d /private/tmp/coursehub-war.XXXXXX)
+cp build/libs/coursehub-0.0.1-SNAPSHOT.war "$war_dir/coursehub.war"
+(
+  cd "$war_dir" &&
+  java -jar coursehub.war --spring.profiles.active=dev
+)
 ```
 
-Open http://localhost:8080/.
+Open the [registration page](http://localhost:8080/register). This instance stores its development database under the temporary directory. Stop `bootRun` first if it is already using port 8080.

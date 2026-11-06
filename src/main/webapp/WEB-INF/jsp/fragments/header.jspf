@@ -7,8 +7,15 @@
         <nav aria-label="Main navigation">
             <ul class="nav-list">
                 <li>
-                    <a href="<c:url value='/' />" aria-current="page">Home</a>
+                    <a href="<c:url value='/' />"
+                    aria-current="${currentPage eq 'register' ? 'false' : 'page'}">Home</a>
                 </li>
+                <c:if test="${empty pageContext.request.userPrincipal}">
+                    <li>
+                        <a href="<c:url value='/register' />"
+                        aria-current="${currentPage eq 'register' ? 'page' : 'false'}">Register</a>
+                    </li>
+                </c:if>
             </ul>
         </nav>
     </div>

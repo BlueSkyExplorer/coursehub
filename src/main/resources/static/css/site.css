@@ -181,3 +181,66 @@ h2 {
         padding: 1.25rem;
     }
 }
+
+.account-panel {
+    max-width: 34rem;
+    margin-inline: auto;
+}
+
+.account-form {
+    display: grid;
+    gap: 1rem;
+}
+
+.account-form label,
+.account-form small,
+.field-error {
+    display: block;
+}
+
+.account-form label {
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+}
+
+.account-form input {
+    width: 100%;
+    padding: 0.625rem;
+    border: 1px solid var(--border);
+    border-radius: 0.375rem;
+    font: inherit;
+}
+
+.account-form button {
+    justify-self: start;
+    min-height: 2.75rem;
+    padding: 0.5rem 1rem;
+    border: 0;
+    border-radius: 0.375rem;
+    background: var(--accent);
+    color: white;
+    font: inherit;
+    cursor: pointer;
+}
+
+.account-form input:focus-visible,
+.account-form button:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+}
+
+.account-form small {
+    color: var(--muted);
+}
+
+.field-error {
+    color: #991b1b;
+}
+
+.success-message {
+    padding: 0.75rem 1rem;
+    border: 1px solid #86b899;
+    border-radius: 0.5rem;
+    background: #edf7ef;
+    color: #14532d;
+}

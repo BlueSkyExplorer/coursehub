@@ -9,6 +9,10 @@
     <%@ include file="fragments/header.jspf" %>
 
     <main id="main-content" class="container site-main" tabindex="-1">
+        <c:if test="${registrationSuccessful}">
+            <p class="success-message" role="status">Your learner account has been created.</p>
+        </c:if>
+        
         <section class="intro" aria-labelledby="page-heading">
             <h1 id="page-heading"><c:out value="${pageTitle}" /></h1>
             <p><c:out value="${introduction}" /></p>
