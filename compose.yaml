@@ -1,0 +1,25 @@
+services:
+  coursehub:
+    build: .
+    image: coursehub:demo
+    container_name: coursehub
+
+    restart: unless-stopped
+
+    ports:
+      - "127.0.0.1:8081:8080"
+
+    environment:
+      SPRING_PROFILES_ACTIVE: demo
+      SPRING_DATASOURCE_URL: jdbc:h2:file:/app/data/coursehub
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SERVER_FORWARD_HEADERS_STRATEGY: framework
+      JAVA_TOOL_OPTIONS: "-Xms128m -Xmx512m"
+
+    volumes:
+      - ./data:/app/data
+
+    mem_limit: 1g
+
+    security_opt:
+      - no-new-privileges:true
